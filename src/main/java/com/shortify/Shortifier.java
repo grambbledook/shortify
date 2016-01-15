@@ -1,4 +1,4 @@
-package com.shortify.service;
+package com.shortify;
 
 import org.springframework.stereotype.Component;
 

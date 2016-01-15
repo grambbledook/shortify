@@ -1,4 +1,4 @@
-package com.shortify.controller;
+package com.shortify;
 
 public class Message {
 

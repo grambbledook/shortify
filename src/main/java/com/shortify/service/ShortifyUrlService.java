@@ -1,6 +1,8 @@
 package com.shortify.service;
 
-import com.shortify.controller.Message;
+import com.shortify.HashCodeGenerator;
+import com.shortify.Shortifier;
+import com.shortify.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
