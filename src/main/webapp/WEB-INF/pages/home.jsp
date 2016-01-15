@@ -25,7 +25,7 @@
 
 </div>
 
-<form:form method="post" modelAttribute="message" action="/">
+<form:form method="post" modelAttribute="entry" action="/">
     <div class="row">
         <form:input path="originalUrl" type="text"/>
     </div>

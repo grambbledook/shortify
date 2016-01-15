@@ -3,12 +3,12 @@ package com.shortify;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Shortifier {
+public class ShortUrlGenerator {
 
     private final String host;
     private final String alphabet;
 
-    public Shortifier(String host, String alphabet) {
+    public ShortUrlGenerator(String host, String alphabet) {
         this.host = host;
         this.alphabet = alphabet;
     }
@@ -22,6 +22,13 @@ public class Shortifier {
             sb.append(nextCharacter);
             hashCode = hashCode / 62;
         }
+        return sb.toString();
+    }
+
+    public String fromId(String id) {
+        StringBuilder sb = new StringBuilder(host);
+        sb.append("/");
+        sb.append(id);
         return sb.toString();
     }
 }

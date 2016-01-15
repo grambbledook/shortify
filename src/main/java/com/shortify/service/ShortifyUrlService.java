@@ -1,8 +1,9 @@
 package com.shortify.service;
 
 import com.shortify.HashCodeGenerator;
-import com.shortify.Shortifier;
-import com.shortify.Message;
+import com.shortify.ShortUrlGenerator;
+import com.shortify.ShortifyUrlDao;
+import com.shortify.ShortifyUrlEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +14,19 @@ public class ShortifyUrlService {
     private HashCodeGenerator generator;
 
     @Autowired
-    private Shortifier shortifier;
+    private ShortUrlGenerator shortUrlGenerator;
 
-    public void shortify(Message message) {
-        String originalUrl = message.getOriginalUrl();
+    @Autowired
+    private ShortifyUrlDao shortifyUrlDao;
+
+    public void shortify(ShortifyUrlEntry entry) {
+        String originalUrl = entry.getOriginalUrl();
 
         long hashCode = generator.generateHashCode(originalUrl);
-        String shortenedUrl = shortifier.generateShortenUrl(hashCode);
+        String shortenedUrl = shortUrlGenerator.generateShortenUrl(hashCode);
 
-        message.setShortenedUrl(shortenedUrl);
+        entry.setShortenedUrl(shortenedUrl);
+
+        shortifyUrlDao.save(entry);
     }
 }

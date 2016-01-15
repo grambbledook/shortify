@@ -1,6 +1,6 @@
 package com.shortify;
 
-public class Message {
+public class ShortifyUrlEntry {
 
     private String shortenedUrl;
     private String originalUrl;

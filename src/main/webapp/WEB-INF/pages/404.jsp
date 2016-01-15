@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -16,17 +20,10 @@
 <body>
 <div class="row">
     <div class="col-md-4"/>
-    <div class="col-md-4">Result!</div>
+    <div class="col-md-4">Oops! Page not found.</div>
     <div class="col-md-4"/>
 
 </div>
-    <div class="row">
-        <p>${entry.originalUrl}</p>
-
-    </div>
-    <div class="row">
-        <p>${entry.shortenedUrl}</p>
-    </div>
 </body>
 </html>
 

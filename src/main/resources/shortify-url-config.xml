@@ -10,13 +10,21 @@
 
     <context:property-placeholder location="classpath:${environment}.properties"/>
 
-    <bean class="com.shortify.Shortifier" id="shortifier">
+    <bean class="com.shortify.ShortUrlGenerator" id="shortUrlGenerator">
         <constructor-arg name="host" value="${shortify.service.host}"/>
         <constructor-arg name="alphabet" value="${shortify.alphabet}"/>
     </bean>
 
     <bean class="org.apache.commons.validator.routines.UrlValidator" id="urlValidator">
         <constructor-arg name="schemes" value="http, https"/>
+    </bean>
+
+    <bean class="com.mongodb.MongoClientURI" id="mongoClientURI">
+        <constructor-arg name="uri" value="${shortify.database.url}"/>
+    </bean>
+
+    <bean class="org.springframework.data.mongodb.core.SimpleMongoDbFactory" id="mongoDbFactory">
+        <constructor-arg name="uri" ref="mongoClientURI"/>
     </bean>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

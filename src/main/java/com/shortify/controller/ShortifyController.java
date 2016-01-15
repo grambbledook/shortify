@@ -1,6 +1,6 @@
 package com.shortify.controller;
 
-import com.shortify.Message;
+import com.shortify.ShortifyUrlEntry;
 import com.shortify.service.ShortifyUrlService;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,21 +21,19 @@ public class ShortifyController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String printWelcomePage(Model model) {
-        model.addAttribute("message", new Message());
+        model.addAttribute("entry", new ShortifyUrlEntry());
         return "home";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String shortifyUrl(@ModelAttribute("message") Message message, Model model) {
-        model.addAttribute("message", message);
-        if (urlValidator.isValid(message.getOriginalUrl())) {
-            shortifyUrlService.shortify(message);
+    public String shortifyUrl(@ModelAttribute("entry") ShortifyUrlEntry shortifyUrlEntry, Model model) {
+        model.addAttribute("entry", shortifyUrlEntry);
+        if (urlValidator.isValid(shortifyUrlEntry.getOriginalUrl())) {
+            shortifyUrlService.shortify(shortifyUrlEntry);
             return "result";
         } else {
             return "invalid";
         }
-
-
     }
 
 }

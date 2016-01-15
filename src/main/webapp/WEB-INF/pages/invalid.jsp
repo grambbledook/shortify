@@ -20,14 +20,14 @@
 <body>
 <div class="row">
     <div class="col-md-4"/>
-    <div class="col-md-4">Oops! ${message.originalUrl} is not a valid url</div>
+    <div class="col-md-4">Oops! ${entry.originalUrl} is not a valid url</div>
     <div class="col-md-4"/>
 
 </div>
 
 
 
-<form:form method="post" modelAttribute="message" action="/">
+<form:form method="post" modelAttribute="entry" action="/">
     <div class="row">
         <form:input path="originalUrl" type="text"/>
     </div>
