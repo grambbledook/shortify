@@ -2,11 +2,11 @@ package com.shortify;
 
 public class ShortUrlEntry {
 
-    private String shortenedUrl;
+    private String shortUrl;
     private String originalUrl;
 
-    public void setShortenedUrl(String shortenedUrl) {
-        this.shortenedUrl = shortenedUrl;
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 
     public void setOriginalUrl(String originalUrl) {
@@ -17,8 +17,8 @@ public class ShortUrlEntry {
         return originalUrl;
     }
 
-    public String getShortenedUrl() {
-        return shortenedUrl;
+    public String getShortUrl() {
+        return shortUrl;
     }
 
 }

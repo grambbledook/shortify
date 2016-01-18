@@ -32,8 +32,8 @@
     </form:form>
 
     <div class="form-group">
-        <label for="shortenUrl">Error message</label>
-        <input id="shortenUrl" class="form-control" type="url" value="Ooops! ${entry.originalUrl} is not a valid url"/>
+        <label for="shortUrl">Error message</label>
+        <input id="shortUrl" class="form-control" type="url" value="Ooops! ${entry.originalUrl} is not a valid url"/>
     </div>
 </div>
 

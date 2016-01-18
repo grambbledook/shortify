@@ -31,8 +31,8 @@
     </form:form>
 
     <div class="form-group">
-        <label for="shortenUrl">Shorten URL</label>
-        <input id="shortenUrl" class="form-control" type="url" value="${entry.shortenedUrl}"/>
+        <label for="shortUrl">Shorten URL</label>
+        <input id="shortUrl" class="form-control" type="url" value="${entry.shortUrl}"/>
     </div>
 </div>
 

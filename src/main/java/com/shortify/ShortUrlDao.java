@@ -18,10 +18,10 @@ public class ShortUrlDao {
     @Autowired
     private MongoDbFactory connectionFactory;
 
-    public ShortUrlEntry findByShortenUrl(String shortenUrl) {
+    public ShortUrlEntry findByShortenUrl(String shortUrl) {
         DB db = connectionFactory.getDb();
         DBCollection collection = db.getCollection("data");
-        DBObject query = QueryBuilder.start("shortenUrl").is(shortenUrl).get();
+        DBObject query = QueryBuilder.start("shortUrl").is(shortUrl).get();
 
         DBObject update = new BasicDBObject("$inc", new BasicDBObject("count", 1));
         DBObject result = collection.findAndModify(query, update);
@@ -31,7 +31,7 @@ public class ShortUrlDao {
         }
 
         ShortUrlEntry entry = new ShortUrlEntry();
-        entry.setShortenedUrl(shortenUrl);
+        entry.setShortUrl(shortUrl);
         entry.setOriginalUrl((String) result.get("originalUrl"));
         return entry;
     }
@@ -43,14 +43,16 @@ public class ShortUrlDao {
 
             BasicDBObject object = new BasicDBObject()
                     .append("originalUrl", entry.getOriginalUrl())
-                    .append("shortenUrl", entry.getShortenedUrl())
+                    .append("shortUrl", entry.getShortUrl())
                     .append("created", DateTime.now().toDate())
                     .append("count", 0);
 
             collection.insert(object);
             logger.trace("Document {} inserted", object);
+        } catch (DuplicateKeyException e) {
+            logger.warn("Short url entry [{}]  already exists in database", entry.getShortUrl());
         } catch (Exception e) {
-            logger.error("Unable to store shortenUrl [{}] in database", entry.getShortenedUrl(), e);
+            logger.error("Unable to store shortUrl [{}] in database", entry.getShortUrl(), e);
             throw new RuntimeException(e);
         }
     }

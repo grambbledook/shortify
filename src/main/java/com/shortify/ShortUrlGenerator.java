@@ -13,7 +13,7 @@ public class ShortUrlGenerator {
         this.alphabet = alphabet;
     }
 
-    public String generateShortenUrl(long hashCode) {
+    public String generateShortUrl(long hashCode) {
         StringBuilder sb = new StringBuilder(host);
         sb.append("/");
 

@@ -1,7 +1,7 @@
 package com.shortify.controller;
 
 import com.shortify.ShortUrlEntry;
-import com.shortify.service.ShortifyUrlService;
+import com.shortify.service.ShortUrlService;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +19,7 @@ public class ShortifyController {
     private static final Logger logger = LoggerFactory.getLogger(ShortifyController.class);
 
     @Autowired
-    private ShortifyUrlService shortifyUrlService;
+    private ShortUrlService shortUrlService;
     @Autowired
     private UrlValidator urlValidator;
 
@@ -36,9 +36,9 @@ public class ShortifyController {
 
         try {
             if (urlValidator.isValid(entry.getOriginalUrl())) {
-                shortifyUrlService.shortify(entry);
+                shortUrlService.shortify(entry);
 
-                logger.trace("Shorten urls for [{}] is [{}]", entry.getOriginalUrl(), entry.getShortenedUrl());
+                logger.trace("Shorten urls for [{}] is [{}]", entry.getOriginalUrl(), entry.getShortUrl());
                 return "result";
             } else {
                 logger.trace("Url [{}] is invalid type of url.", entry.getOriginalUrl());
