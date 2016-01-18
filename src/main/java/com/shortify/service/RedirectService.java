@@ -1,8 +1,8 @@
 package com.shortify.service;
 
 import com.shortify.ShortUrlGenerator;
-import com.shortify.ShortifyUrlDao;
-import com.shortify.ShortifyUrlEntry;
+import com.shortify.ShortUrlDao;
+import com.shortify.ShortUrlEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ public class RedirectService {
     private ShortUrlGenerator shortUrlGenerator;
 
     @Autowired
-    private ShortifyUrlDao shortifyUrlDao;
+    private ShortUrlDao shortUrlDao;
 
-    public ShortifyUrlEntry findOriginalUrl(String id) {
+    public ShortUrlEntry findOriginalUrl(String id) {
         String shortenUrl = shortUrlGenerator.fromId(id);
-        return shortifyUrlDao.findByShortenUrl(shortenUrl);
+        return shortUrlDao.findByShortenUrl(shortenUrl);
     }
 
 }

@@ -11,16 +11,14 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class ShortifyUrlDao {
+public class ShortUrlDao {
 
-    private final static Logger logger = LoggerFactory.getLogger(ShortifyUrlDao.class);
+    private final static Logger logger = LoggerFactory.getLogger(ShortUrlDao.class);
 
     @Autowired
     private MongoDbFactory connectionFactory;
 
-    public ShortifyUrlEntry findByShortenUrl(String shortenUrl) {
-
-
+    public ShortUrlEntry findByShortenUrl(String shortenUrl) {
         DB db = connectionFactory.getDb();
         DBCollection collection = db.getCollection("data");
         DBObject query = QueryBuilder.start("shortenUrl").is(shortenUrl).get();
@@ -28,18 +26,17 @@ public class ShortifyUrlDao {
         DBObject update = new BasicDBObject("$inc", new BasicDBObject("count", 1));
         DBObject result = collection.findAndModify(query, update);
 
-        ShortifyUrlEntry entry = new ShortifyUrlEntry();
-        entry.setShortenedUrl(shortenUrl);
-
         if (Objects.isNull(result)) {
             return null;
         }
 
+        ShortUrlEntry entry = new ShortUrlEntry();
+        entry.setShortenedUrl(shortenUrl);
         entry.setOriginalUrl((String) result.get("originalUrl"));
         return entry;
     }
 
-    public void save(ShortifyUrlEntry entry) {
+    public void save(ShortUrlEntry entry) {
         try {
             DB mongo = connectionFactory.getDb();
             DBCollection collection = mongo.getCollection("data");
@@ -54,6 +51,7 @@ public class ShortifyUrlDao {
             logger.trace("Document {} inserted", object);
         } catch (Exception e) {
             logger.error("Unable to store shortenUrl [{}] in database", entry.getShortenedUrl(), e);
+            throw new RuntimeException(e);
         }
     }
 
