@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,7 +23,7 @@ public class RedirectController {
     private RedirectService redirectService;
 
     @RequestMapping(value = "/{id:[a-zA-Z0-9]{1,11}}", method = RequestMethod.GET)
-    public String lookup(@PathVariable String id) {
+    public String lookup(@PathVariable String id, Model model) {
         logger.trace("Redirect request received for id [{}]", id);
 
         try {
@@ -36,6 +37,7 @@ public class RedirectController {
             return "redirect:" + entry.getOriginalUrl();
         } catch (Exception e) {
             logger.error("An error occurred", e);
+            model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
     }

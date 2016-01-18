@@ -46,6 +46,7 @@ public class ShortifyController {
             }
         }catch (Exception e) {
             logger.error("An error occurred", e);
+            model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
     }
