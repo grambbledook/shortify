@@ -30,6 +30,7 @@ public class RedirectController {
             ShortUrlEntry entry = redirectService.findOriginalUrl(id);
 
             if (Objects.isNull(entry)) {
+                model.addAttribute("entry", new ShortUrlEntry());
                 return "404";
             }
 
