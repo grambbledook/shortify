@@ -17,13 +17,31 @@
 <body>
 <div class="container">
 
-    <div class="page-header">
-        <h3>An error occurred. Please try again later.</h3></div>
-    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">URL Shortifier</a>
+            </div>
 
-    <div class="panel">
+            <div class="btn  dropdown navbar-text navbar-right">
+                <a id="dLabel" data-target="#" data-toggle="dropdown" role="button"aria-haspopup="true" aria-expanded="false">
+                    Sign in
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href="/user-logon" class="navbar-link">Sign in</a></li>
+                    <li><a href="/user-signup" class="navbar-link">Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
     <form:form method="post" modelAttribute="entry" action="/">
         <div class="form-group">
+            <h3>An error occurred, please try again later</h3>
             <label for="originalUrl">Original URL</label>
             <form:input path="originalUrl" class="form-control" type="url" value="${entry.originalUrl}"/>
         </div>
@@ -40,6 +58,7 @@
         <textarea id="errorMessage" class="form-control" rows="3">${errorMessage}</textarea>
     </div>
     </div>
+</div>
 
 </div>
 

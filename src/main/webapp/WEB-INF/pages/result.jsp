@@ -16,12 +16,32 @@
 <body>
 <div class="container">
 
-    <div class="page-header">
-        <h3>Your result</h3>
-    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">URL Shortifier</a>
+            </div>
+            <div class="btn  dropdown navbar-text navbar-right">
+                <a id="dLabel" data-target="#" data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false">
+                    Sign in
+                    <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href="/user-logon" class="navbar-link">Sign in</a></li>
+                    <li><a href="/user-signup" class="navbar-link">Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
 
     <form:form method="post" modelAttribute="entry" action="/">
         <div class="form-group">
+            <h3>Url successfully shortened</h3>
             <label for="originalUrl">Original URL</label>
             <form:input path="originalUrl" class="form-control" type="url" value="${entry.originalUrl}"/>
         </div>
@@ -33,6 +53,7 @@
     <div class="form-group">
         <label for="shortUrl">Shorten URL</label>
         <input id="shortUrl" class="form-control" type="url" value="${entry.shortUrl}"/>
+    </div>
     </div>
 </div>
 

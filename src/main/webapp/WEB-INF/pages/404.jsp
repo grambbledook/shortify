@@ -16,10 +16,28 @@
 <body>
 <div class="container">
 
-    <div class="page-header">
-        <h3>Oops! page not found.</h3></p>
-    </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">URL Shortifier</a>
+            </div>
+            <div class="btn  dropdown navbar-text navbar-right">
+                <a id="dLabel" data-target="#" data-toggle="dropdown" role="button"
+                   aria-haspopup="true" aria-expanded="false">
+                    Sign in
+                    <span class="caret"></span>
+                </a>
 
+                <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li><a href="/user-logon" class="navbar-link">Sign in</a></li>
+                    <li><a href="/user-signup" class="navbar-link">Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
     <form:form method="post" modelAttribute="entry" action="/">
         <div class="form-group">
             <label for="originalUrl">Original URL</label>
@@ -29,6 +47,7 @@
             <button type="submit" class="btn btn-default">Submit</button>
         </div>
     </form:form>
+    </div>
 </div>
 
 
