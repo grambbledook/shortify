@@ -13,10 +13,8 @@ public class ShortUrlGenerator {
         this.alphabet = alphabet;
     }
 
-    public String generateShortUrl(long hashCode) {
-        StringBuilder sb = new StringBuilder(host);
-        sb.append("/");
-
+    public String generateId(long hashCode) {
+        StringBuilder sb = new StringBuilder();
         while (hashCode != 0) {
             char nextCharacter = alphabet.charAt(Math.abs((int) (hashCode % alphabet.length())));
             sb.append(nextCharacter);
@@ -26,9 +24,6 @@ public class ShortUrlGenerator {
     }
 
     public String fromId(String id) {
-        StringBuilder sb = new StringBuilder(host);
-        sb.append("/");
-        sb.append(id);
-        return sb.toString();
+        return host + "/" + id;
     }
 }

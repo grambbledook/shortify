@@ -1,7 +1,7 @@
 package com.shortify.service;
 
 import com.shortify.ShortUrlGenerator;
-import com.shortify.ShortUrlDao;
+import com.shortify.dao.ShortUrlDao;
 import com.shortify.ShortUrlEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

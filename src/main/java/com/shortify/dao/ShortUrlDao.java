@@ -1,6 +1,7 @@
-package com.shortify;
+package com.shortify.dao;
 
 import com.mongodb.*;
+import com.shortify.ShortUrlEntry;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,8 @@ public class ShortUrlDao {
 
     public ShortUrlEntry findByShortenUrl(String shortUrl) {
         DB db = connectionFactory.getDb();
-        DBCollection collection = db.getCollection("data");
-        DBObject query = QueryBuilder.start("shortUrl").is(shortUrl).get();
+        DBCollection collection = db.getCollection("links");
+        DBObject query = QueryBuilder.start("id").is(shortUrl).get();
 
         DBObject update = new BasicDBObject("$inc", new BasicDBObject("count", 1));
         DBObject result = collection.findAndModify(query, update);
@@ -39,18 +40,18 @@ public class ShortUrlDao {
     public void save(ShortUrlEntry entry) {
         try {
             DB mongo = connectionFactory.getDb();
-            DBCollection collection = mongo.getCollection("data");
+            DBCollection collection = mongo.getCollection("links");
 
             BasicDBObject object = new BasicDBObject()
                     .append("originalUrl", entry.getOriginalUrl())
-                    .append("shortUrl", entry.getShortUrl())
+                    .append("id", entry.getId())
                     .append("created", DateTime.now().toDate())
                     .append("count", 0);
 
             collection.insert(object);
             logger.trace("Document {} inserted", object);
         } catch (DuplicateKeyException e) {
-            logger.warn("Short url entry [{}]  already exists in database", entry.getShortUrl());
+            logger.warn("Id [{}] for url entry [{}]  already exists in database", entry.getShortUrl(), entry.getOriginalUrl());
         } catch (Exception e) {
             logger.error("Unable to store shortUrl [{}] in database", entry.getShortUrl(), e);
             throw new RuntimeException(e);

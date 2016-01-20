@@ -2,7 +2,7 @@ package com.shortify.service;
 
 import com.shortify.HashCodeGenerator;
 import com.shortify.ShortUrlGenerator;
-import com.shortify.ShortUrlDao;
+import com.shortify.dao.ShortUrlDao;
 import com.shortify.ShortUrlEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +23,12 @@ public class ShortUrlService {
         String originalUrl = entry.getOriginalUrl();
 
         long hashCode = generator.generateHashCode(originalUrl);
-        String shortenedUrl = shortUrlGenerator.generateShortUrl(hashCode);
 
-        entry.setShortUrl(shortenedUrl);
+        String id = shortUrlGenerator.generateId(hashCode);
+        entry.setId(id);
+
+        String shortUrl = shortUrlGenerator.fromId(id);
+        entry.setShortUrl(shortUrl);
 
         shortUrlDao.save(entry);
     }
