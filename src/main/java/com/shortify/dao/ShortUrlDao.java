@@ -19,10 +19,10 @@ public class ShortUrlDao {
     @Autowired
     private MongoDbFactory connectionFactory;
 
-    public ShortUrlEntry findByShortenUrl(String shortUrl) {
+    public ShortUrlEntry findById(String id) {
         DB db = connectionFactory.getDb();
         DBCollection collection = db.getCollection("links");
-        DBObject query = QueryBuilder.start("id").is(shortUrl).get();
+        DBObject query = QueryBuilder.start("_id").is(id).get();
 
         DBObject update = new BasicDBObject("$inc", new BasicDBObject("count", 1));
         DBObject result = collection.findAndModify(query, update);
@@ -32,10 +32,10 @@ public class ShortUrlDao {
         }
 
         ShortUrlEntry entry = new ShortUrlEntry();
-        entry.setShortUrl(shortUrl);
+        entry.setId(id);
         entry.setOriginalUrl((String) result.get("originalUrl"));
         return entry;
-    }
+}
 
     public void save(ShortUrlEntry entry) {
         try {
@@ -44,7 +44,7 @@ public class ShortUrlDao {
 
             BasicDBObject object = new BasicDBObject()
                     .append("originalUrl", entry.getOriginalUrl())
-                    .append("id", entry.getId())
+                    .append("_id", entry.getId())
                     .append("created", DateTime.now().toDate())
                     .append("count", 0);
 
